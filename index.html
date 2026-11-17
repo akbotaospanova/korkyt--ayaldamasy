@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Қорқыт аялдамасы — қоғамдық көліктегі даналық ойындары</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#10233a; --muted:#5b6b7f; --bg:#f3efe6; --card:#fff;
+  --teal:#0f6d74; --teal2:#0b4f55; --gold:#e3a81c; --red:#d4483b; --green:#1f9d63;
+  --screen:#0c1a2b; --screen2:#13283f;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Montserrat,system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.45}
+button{font-family:inherit;cursor:pointer}
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--teal2),var(--teal));color:#fff;padding:36px 0 30px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;border:22px solid rgba(227,168,28,.25);border-radius:50%}
+.tag{display:inline-block;background:var(--gold);color:#2b1d00;font-weight:700;font-size:12px;padding:4px 10px;border-radius:20px;letter-spacing:.04em}
+.hero h1{font-size:clamp(26px,5vw,42px);margin:12px 0 8px;line-height:1.1}
+.hero p{max-width:640px;opacity:.92;margin:0 0 18px}
+.nav{display:flex;flex-wrap:wrap;gap:8px}
+.nav a{color:#fff;text-decoration:none;background:rgba(255,255,255,.14);padding:8px 14px;border-radius:24px;font-weight:600;font-size:14px}
+.nav a:hover{background:rgba(255,255,255,.25)}
+
+.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:22px 0 6px}
+.why div{background:var(--card);border-radius:14px;padding:14px 16px;box-shadow:0 2px 10px rgba(16,35,58,.06);font-size:14px}
+.why b{display:block;font-size:15px;margin-bottom:2px}
+
+section.game{padding:34px 0 10px}
+.ghead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.num{background:var(--gold);color:#2b1d00;font-weight:800;border-radius:10px;padding:2px 10px;font-size:18px}
+.ghead h2{margin:0;font-size:clamp(20px,3.6vw,28px)}
+.where{color:var(--teal);font-weight:700;font-size:14px}
+.desc{color:var(--muted);max-width:760px;margin:6px 0 16px;font-size:15px}
+
+/* ===== BUS STOP SCENE ===== */
+.stop-scene{position:relative;border-radius:22px;overflow:hidden;padding:18px 14px 0;
+  background:linear-gradient(#bfe3f2 0%,#e9f6fb 55%,#d9d4c7 55%,#cfc9bb 100%)}
+.city{position:absolute;left:0;right:0;top:40px;height:200px;opacity:.35;pointer-events:none}
+.shelter{position:relative;max-width:900px;margin:0 auto}
+.roof{background:linear-gradient(#1b3550,#10233a);color:#fff;border-radius:14px 14px 4px 4px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;box-shadow:0 6px 0 #0a1726}
+.roof .sign{display:flex;align-items:center;gap:10px}
+.roof .bus-ic{background:var(--gold);color:#2b1d00;border-radius:8px;padding:4px 8px;font-weight:800;font-size:13px}
+.roof .name{font-weight:800;font-size:clamp(13px,2.6vw,18px)}
+.roof .eta{font-size:12px;background:rgba(255,255,255,.1);padding:4px 10px;border-radius:12px;white-space:nowrap}
+.roof .eta b{color:var(--gold)}
+.frame{display:grid;grid-template-columns:22px 1fr 22px;gap:0;margin-top:0}
+.pillar{background:linear-gradient(90deg,#90a1b3,#d5dee7,#90a1b3)}
+.glass{background:linear-gradient(120deg,rgba(255,255,255,.55),rgba(190,225,240,.35) 40%,rgba(255,255,255,.5));
+  border-left:2px solid #a9b9c8;border-right:2px solid #a9b9c8;padding:14px 12px 0;position:relative}
+.totem{background:#1c2b3c;border-radius:18px;padding:10px;box-shadow:0 10px 30px rgba(0,0,0,.25);position:relative}
+.totem .brand{display:flex;justify-content:space-between;color:#9fb3c8;font-size:11px;padding:0 4px 6px;font-weight:600}
+.screen{background:radial-gradient(ellipse at top,var(--screen2),var(--screen));border-radius:10px;color:#eaf2fb;padding:12px;min-height:360px;position:relative;overflow:hidden}
+.side-info{display:flex;gap:10px;align-items:stretch;margin:10px 0 0;flex-wrap:wrap}
+.sticker{display:flex;gap:10px;align-items:center;background:#fff;border-radius:12px;padding:8px 10px;font-size:12px;font-weight:600;flex:1;min-width:220px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.sticker svg{flex:none}
+.poster{flex:1;min-width:220px;background:var(--gold);border-radius:12px;padding:8px 12px;font-size:12px;color:#2b1d00}
+.poster b{display:block;font-size:13px}
+.bench{height:16px;background:linear-gradient(#8a5a33,#6b4426);border-radius:4px;margin:14px 10px 0;position:relative}
+.bench:before,.bench:after{content:"";position:absolute;top:16px;width:8px;height:22px;background:#444}
+.bench:before{left:12%}.bench:after{right:12%}
+.curb{height:44px;background:linear-gradient(#9b968a,#7f7a6f);margin:20px -14px 0;position:relative}
+.curb:after{content:"";position:absolute;left:0;right:0;top:20px;height:4px;background:repeating-linear-gradient(90deg,#fff 0 40px,transparent 40px 80px);opacity:.7}
+
+/* game 1 */
+.g-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.g-title{font-weight:800;font-size:15px}
+.g-title small{display:block;font-weight:500;color:#9fb3c8;font-size:11px}
+.pills{display:flex;gap:6px}
+.pill{background:rgba(255,255,255,.08);border-radius:10px;padding:4px 9px;font-size:12px;font-weight:700;white-space:nowrap}
+.pill b{color:var(--gold)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.colh{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#9fb3c8;font-weight:700;margin-bottom:6px}
+.mcard{width:100%;text-align:left;background:#1d3a57;border:2px solid #2b5277;color:#eaf2fb;border-radius:10px;padding:8px 9px;margin-bottom:7px;font-size:12.5px;line-height:1.35;transition:.15s;font-weight:500}
+.mcard.k{border-left:5px solid var(--gold)}
+.mcard.m{border-left:5px solid #4fb6c0}
+.mcard:hover{border-color:#5d8db9}
+.mcard.sel{background:#2a5885;border-color:var(--gold);box-shadow:0 0 0 3px rgba(227,168,28,.25)}
+.mcard.ok{background:rgba(31,157,99,.25);border-color:var(--green);color:#cfeedd;cursor:default}
+.mcard.ok .tick{display:inline}
+.tick{display:none;float:right;color:#5be39f;font-weight:800;margin-left:4px}
+.mcard.bad{animation:shake .4s;border-color:var(--red)}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.overlay{position:absolute;inset:0;background:rgba(8,18,30,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;gap:10px;z-index:3}
+.overlay.hide{display:none}
+.overlay h3{margin:0;font-size:22px}
+.overlay p{margin:0;color:#c6d5e4;max-width:420px;font-size:14px}
+.big{background:var(--gold);color:#2b1d00;border:0;border-radius:12px;padding:12px 22px;font-weight:800;font-size:16px}
+.big:hover{filter:brightness(1.05)}
+.hint{font-size:11px;color:#8aa0b6;margin-top:6px;text-align:center}
+
+/* ===== BUS SCENE ===== */
+.bus-scene{border-radius:22px;overflow:hidden;background:#2b3440;position:relative;padding:0 0 0}
+.ceiling{height:46px;background:linear-gradient(#e7ebef,#c8d0d8);position:relative}
+.ceiling .light{position:absolute;top:8px;left:8%;right:8%;height:8px;border-radius:6px;background:#fffbe6;box-shadow:0 0 18px #fff7c2}
+.rail{position:absolute;left:0;right:0;top:34px;height:7px;background:linear-gradient(#f0d36a,#c99a12)}
+.straps{position:absolute;left:0;right:0;top:40px;display:flex;justify-content:space-around;z-index:2;pointer-events:none}
+.straps span{width:20px;height:44px;border:4px solid #f0c330;border-top-width:22px;border-radius:0 0 12px 12px;opacity:.9}
+.bus-mount{position:relative;z-index:3;max-width:820px;margin:-6px auto 0;padding:0 14px}
+.mount-bar{width:40%;height:14px;margin:0 auto;background:#555f6b;border-radius:0 0 6px 6px}
+.bus-screen{background:#111;border-radius:14px;padding:8px;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.bus-screen .screen{min-height:380px}
+.windows{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:18px 14px 0;position:relative}
+.win{height:110px;border-radius:14px;border:6px solid #9aa5b1;overflow:hidden;position:relative;background:linear-gradient(#9fd3ea,#dff1f8)}
+.win .move{position:absolute;bottom:0;left:0;width:200%;height:70px;animation:drive 9s linear infinite}
+@keyframes drive{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.seats{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px;padding:14px 18px 18px}
+.seat{height:56px;border-radius:12px 12px 6px 6px;background:linear-gradient(#1e6f9a,#155675);position:relative}
+.seat:after{content:"";position:absolute;left:8%;right:8%;top:10px;height:8px;border-radius:4px;background:repeating-linear-gradient(90deg,#e3a81c 0 8px,#155675 8px 16px);opacity:.6}
+.bus-qr{position:absolute;right:18px;bottom:16px;z-index:4;background:#fff;border-radius:10px;padding:6px 8px;display:flex;gap:6px;align-items:center;font-size:10.5px;font-weight:700;max-width:170px}
+
+/* route */
+.route{position:relative;margin:4px 6px 14px;height:46px}
+.route .line{position:absolute;left:0;right:0;top:20px;height:4px;background:#2b5277;border-radius:2px}
+.route .fill{position:absolute;left:0;top:20px;height:4px;background:var(--gold);border-radius:2px;transition:width .8s}
+.route .dot{position:absolute;top:15px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:#13283f;border:3px solid #2b5277}
+.route .dot.done{border-color:var(--gold);background:var(--gold)}
+.route .dot.star{background:var(--green);border-color:var(--green)}
+.route .dot.miss{background:var(--red);border-color:var(--red)}
+.route .lbl{position:absolute;top:33px;font-size:9px;color:#8aa0b6;transform:translateX(-50%);white-space:nowrap}
+.route .bus{position:absolute;top:-2px;font-size:20px;transform:translateX(-50%) scaleX(-1);transition:left .8s}
+.next{display:flex;justify-content:space-between;align-items:center;background:rgba(227,168,28,.12);border:1px solid rgba(227,168,28,.4);border-radius:10px;padding:6px 10px;font-size:12px;margin-bottom:10px;gap:8px}
+.next b{color:var(--gold)}
+.q{background:#1d3a57;border-left:5px solid var(--gold);border-radius:10px;padding:10px 12px;font-size:15px;font-weight:600;margin-bottom:10px}
+.q small{display:block;color:#9fb3c8;font-size:11px;font-weight:600;margin-bottom:3px}
+.opt{display:block;width:100%;text-align:left;background:#132e48;border:2px solid #2b5277;color:#eaf2fb;border-radius:10px;padding:10px 12px;margin-bottom:8px;font-size:14px;font-weight:500}
+.opt:hover:not(:disabled){border-color:#5d8db9}
+.opt.ok{background:rgba(31,157,99,.3);border-color:var(--green)}
+.opt.no{background:rgba(212,72,59,.3);border-color:var(--red)}
+.opt:disabled{cursor:default}
+.fb{min-height:20px;font-size:13px;font-weight:600}
+
+/* ===== PHONE ===== */
+.phone-row{display:flex;gap:26px;align-items:center;flex-wrap:wrap;justify-content:center;background:linear-gradient(135deg,#e6dcc6,#f6f1e6);border-radius:22px;padding:24px 14px}
+.phone{width:320px;max-width:100%;background:#0d0f12;border-radius:40px;padding:12px;box-shadow:0 20px 40px rgba(0,0,0,.25)}
+.phone .notch{width:110px;height:22px;background:#0d0f12;border-radius:0 0 14px 14px;margin:-12px auto 0;position:relative;z-index:2}
+.phone .screen{border-radius:28px;min-height:540px;margin-top:-22px;padding:34px 14px 16px;background:linear-gradient(#173352,#0c1a2b)}
+.phone-note{max-width:340px;font-size:14px;color:var(--muted)}
+.phone-note h4{color:var(--ink);margin:0 0 6px;font-size:17px}
+.phone-note li{margin-bottom:6px}
+.sayc{background:#fff;color:var(--ink);border-radius:18px;padding:18px 16px;min-height:170px;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;font-size:16.5px;margin:12px 0 14px;box-shadow:0 8px 20px rgba(0,0,0,.3);position:relative;transition:transform .25s}
+.sayc.fly-l{transform:translateX(-30px) rotate(-6deg)}
+.sayc.fly-r{transform:translateX(30px) rotate(6deg)}
+.sayc .cnt{position:absolute;top:8px;right:12px;font-size:11px;color:var(--muted);font-weight:600}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.who{border:0;border-radius:14px;padding:14px 6px;font-weight:800;font-size:14px;color:#fff}
+.who.k{background:#b9811a}
+.who.h{background:#1b8a92}
+.who:disabled{opacity:.5}
+.fb3{margin-top:12px;font-size:12.5px;background:rgba(255,255,255,.07);border-radius:12px;padding:10px;min-height:64px}
+.fb3 b.g{color:#5be39f}.fb3 b.r{color:#ff8a7e}
+.streak{display:flex;justify-content:space-between;font-size:12px;font-weight:700}
+.streak b{color:var(--gold)}
+
+/* answer key */
+.key{background:#fff;border-radius:16px;padding:16px;margin:34px 0;box-shadow:0 2px 10px rgba(16,35,58,.06)}
+.key summary{font-weight:800;cursor:pointer}
+.key table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13px}
+.key td,.key th{border-bottom:1px solid #eee;padding:7px 6px;vertical-align:top;text-align:left}
+.key th{color:var(--muted);font-size:12px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:10px 0 30px}
+
+@media (max-width:640px){
+  .cols{gap:6px}
+  .mcard{font-size:11.5px;padding:7px}
+  .windows{grid-template-columns:1fr 1fr}
+  .windows .win:nth-child(3){display:none}
+  .seats{grid-template-columns:1fr 1fr}
+  .route .lbl{display:none}
+  .roof .eta{display:none}
+  .bus-qr{position:static;margin:0 14px 14px;max-width:none}
+  .frame{grid-template-columns:10px 1fr 10px}
+  .glass{padding:10px 6px 0}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="tag">ЖАС ӨНЕРТАПҚЫШ ЖОБАСЫ</span>
+    <h1>«Қорқыт аялдамасы»: даналық жолда</h1>
+    <p>Қорқыт атаның нақыл сөздері мен қазақ мақалдарын сәйкестендіретін 3 интерактивті ойын. Олар қала аялдамаларындағы сенсорлы экрандарға, автобус ішіндегі мониторларға және QR арқылы жолаушының телефонына орнатылады. Автобус күткен 3–5 минут бос өтпей, рухани мұраны тануға арналады.</p>
+    <nav class="nav">
+      <a href="#game1">1 · Аялдамада</a>
+      <a href="#game2">2 · Автобуста</a>
+      <a href="#game3">3 · Телефонда (QR)</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="why">
+    <div><b>⏱ Күту уақыты пайдалы өтеді</b>Бір ойын 2–3 минутқа арналған, яғни автобус келгенше бітіп қалады.</div>
+    <div><b>👆 Сенсорлы әрі көзге түседі</b>Жарқын экран мен қозғалатын автобус өтіп бара жатқандарды да тоқтатады.</div>
+    <div><b>👨‍👩‍👧 Барлық жасқа арналған</b>Оқушыдан атаға дейін ойнай алады. Ата мен немере бірге ойнап, жарыса алады.</div>
+    <div><b>📱 Жолда да жалғасады</b>QR-кодты сканерлеп, ойынды автобуста телефоннан жалғастыруға болады.</div>
+  </div>
+</div>
+
+<!-- ============ GAME 1 ============ -->
+<section class="game" id="game1">
+  <div class="wrap">
+    <div class="ghead"><span class="num">1</span><h2>«Жұбын тап»</h2><span class="where">📍 Аялдамадағы сенсорлы экран</span></div>
+    <p class="desc">Сол жақтан Қорқыттың нақылын, оң жақтан мағынасы сай келетін қазақ мақалын таңдаңыз. Дұрыс жұп жасылға боялады, қате таңдасаңыз карточка дірілдейді. Ойын 5 жұптан тұратын 2 раундтан құралады. Уақытыңыз бен қателер саны есептеліп отырады.</p>
+
+    <div class="stop-scene">
+      <svg class="city" viewBox="0 0 1000 200" preserveAspectRatio="none"><path fill="#4b6a85" d="M0 200V120h60V70h50v50h40V40h70v80h30V90h60v110zM360 200V60h40V30h30v30h40v140zM490 200V100h80V50h60v150zM650 200V80h40V20h20v60h40v120zM790 200V110h60V60h70v60h80v80z"/></svg>
+      <div class="shelter">
+        <div class="roof">
+          <div class="sign"><span class="bus-ic">🚌 32 · 63 · 169</span><span class="name">«Қорқыт ата» аялдамасы</span></div>
+          <div class="eta">32-автобус: <b id="eta">3 мин</b></div>
+        </div>
+        <div class="frame">
+          <div class="pillar"></div>
+          <div class="glass">
+            <div class="totem">
+              <div class="brand"><span>ДАНАЛЫҚ ЭКРАНЫ</span><span id="clock">18:46</span></div>
+              <div class="screen" id="g1">
+                <div class="g-top">
+                  <div class="g-title">Жұбын тап <small id="g1round">Раунд 1 / 2</small></div>
+                  <div class="pills"><span class="pill">⏱ <b id="g1time">0:00</b></span><span class="pill">✔ <b id="g1score">0</b>/10</span><span class="pill">✖ <b id="g1err">0</b></span></div>
+                </div>
+                <div class="cols">
+                  <div><div class="colh">Қорқыт ата</div><div id="g1left"></div></div>
+                  <div><div class="colh">Қазақ мақалы</div><div id="g1right"></div></div>
+                </div>
+                <div class="hint">Алдымен бір жақтан, сосын екінші жақтан таңдаңыз</div>
+                <div class="overlay" id="g1start">
+                  <h3>Автобус келгенше ойнап көр!</h3>
+                  <p>Қорқыт атаның 10 нақылына халық мақалынан жұп тап. Барлығы 2 минутқа жуық уақыт алады.</p>
+                  <button class="big" id="g1go">▶ Бастау</button>
+                </div>
+                <div class="overlay hide" id="g1end">
+                  <h3>🎉 Жарайсың!</h3>
+                  <p id="g1res"></p>
+                  <button class="big" id="g1again">↻ Қайта ойнау</button>
+                </div>
+              </div>
+            </div>
+            <div class="side-info">
+              <div class="sticker"><span class="qr" data-size="58"></span><span>Автобусқа міндің бе?<br>Ойынды <b>телефонда</b> жалғастыр 👉 QR</span></div>
+              <div class="poster"><b>Күннің нақылы</b>«Ат қиналмай, жол шалмас» (Қорқыт ата)</div>
+            </div>
+            <div class="bench"></div>
+          </div>
+          <div class="pillar"></div>
+        </div>
+      </div>
+      <div class="curb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GAME 2 ============ -->
+<section class="game" id="game2">
+  <div class="wrap">
+    <div class="ghead"><span class="num">2</span><h2>«Даналық маршруты»</h2><span class="where">🚌 Автобус салонындағы монитор</span></div>
+    <p class="desc">Маршрутта 10 аялдама бар, әр аялдамада бір Қорқыт нақылы беріледі. Үш мақалдың ішінен мағынасы сай келетінін таңдау керек. Дұрыс жауап берсеңіз, аялдама жасыл жұлдызға айналады, ал автобус келесі «құндылық» аялдамасына жүреді: Өнеге, Шындық, Еңбек...</p>
+
+    <div class="bus-scene">
+      <div class="ceiling"><div class="light"></div><div class="rail"></div></div>
+      <div class="straps"><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="bus-mount">
+        <div class="mount-bar"></div>
+        <div class="bus-screen">
+          <div class="screen" id="g2">
+            <div class="route" id="route"><div class="line"></div><div class="fill" id="rfill"></div></div>
+            <div class="next"><span>Аялдама: <b id="g2stop">Өнеге</b></span><span>⭐ <b id="g2score">0</b>/10</span></div>
+            <div class="q" id="g2q"></div>
+            <div id="g2opts"></div>
+            <div class="fb" id="g2fb"></div>
+            <div class="overlay" id="g2start">
+              <h3>🚌 Даналық маршрутына қош келдіңіз!</h3>
+              <p>Әр аялдамада Қорқыт атаның нақылына сай мақалды таңдаңыз. Соңғы аялдамаға дейін қанша жұлдыз жинайсыз?</p>
+              <button class="big" id="g2go">▶ Жолға шығу</button>
+            </div>
+            <div class="overlay hide" id="g2end">
+              <h3>🏁 Соңғы аялдама!</h3>
+              <p id="g2res"></p>
+              <button class="big" id="g2again">↻ Маршрутты қайталау</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="windows">
+        <div class="win"><svg class="move" viewBox="0 0 800 70" preserveAspectRatio="none"><g fill="#5b7a94"><path d="M0 70V30h40V10h30v20h40v40zM140 70V20h50v50zM220 70V35h70V15h20v55zM340 70V25h40v45z"/><path d="M400 70V30h40V10h30v20h40v40zM540 70V20h50v50zM620 70V35h70V15h20v55zM740 70V25h40v45z"/></g><g fill="#3f8f5a"><circle cx="120" cy="58" r="14"/><circle cx="320" cy="56" r="16"/><circle cx="520" cy="58" r="14"/><circle cx="720" cy="56" r="16"/></g></svg></div>
+        <div class="win"><svg class="move" viewBox="0 0 800 70" preserveAspectRatio="none" style="animation-delay:-3s"><g fill="#5b7a94"><path d="M0 70V30h40V10h30v20h40v40zM140 70V20h50v50zM220 70V35h70V15h20v55zM340 70V25h40v45z"/><path d="M400 70V30h40V10h30v20h40v40zM540 70V20h50v50zM620 70V35h70V15h20v55zM740 70V25h40v45z"/></g><g fill="#3f8f5a"><circle cx="120" cy="58" r="14"/><circle cx="320" cy="56" r="16"/><circle cx="520" cy="58" r="14"/><circle cx="720" cy="56" r="16"/></g></svg></div>
+        <div class="win"><svg class="move" viewBox="0 0 800 70" preserveAspectRatio="none" style="animation-delay:-6s"><g fill="#5b7a94"><path d="M0 70V30h40V10h30v20h40v40zM140 70V20h50v50zM220 70V35h70V15h20v55zM340 70V25h40v45z"/><path d="M400 70V30h40V10h30v20h40v40zM540 70V20h50v50zM620 70V35h70V15h20v55zM740 70V25h40v45z"/></g><g fill="#3f8f5a"><circle cx="120" cy="58" r="14"/><circle cx="320" cy="56" r="16"/><circle cx="520" cy="58" r="14"/><circle cx="720" cy="56" r="16"/></g></svg></div>
+      </div>
+      <div class="seats"><div class="seat"></div><div class="seat"></div><div class="seat"></div><div class="seat"></div></div>
+      <div class="bus-qr"><span class="qr" data-size="44"></span><span>Телефоннан ойна: «Кім айтты?»</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GAME 3 ============ -->
+<section class="game" id="game3">
+  <div class="wrap">
+    <div class="ghead"><span class="num">3</span><h2>«Кім айтты?»</h2><span class="where">📱 Аялдама мен автобустағы QR → жолаушының телефоны</span></div>
+    <p class="desc">Экранға 20 сөздің бірі шығады. Ойыншы оның Қорқыт атаның нақылы ма, әлде халық мақалы ма екенін анықтайды. Әр жауаптан кейін сөздің екінші тараптағы жұбы көрсетіледі, сондықтан ойын жұптарды есте сақтауға да көмектеседі.</p>
+    <div class="phone-row">
+      <div class="phone"><div class="notch"></div>
+        <div class="screen" id="g3">
+          <div class="streak"><span>Ұпай: <b id="g3score">0</b></span><span>🔥 Қатарынан: <b id="g3streak">0</b></span></div>
+          <div class="sayc" id="g3card"><span class="cnt" id="g3cnt">1/20</span><span id="g3text"></span></div>
+          <div class="btns"><button class="who k" id="g3k">📜 Қорқыт ата</button><button class="who h" id="g3h">🏕 Халық мақалы</button></div>
+          <div class="fb3" id="g3fb">Сөзді оқып, кімдікі екенін таңдаңыз.</div>
+          <div class="overlay hide" id="g3end" style="border-radius:28px">
+            <h3>Нәтиже</h3><p id="g3res"></p><button class="big" id="g3again">↻ Қайта</button>
+          </div>
+        </div>
+      </div>
+      <div class="phone-note">
+        <h4>Қалай орнатылады?</h4>
+        <ul>
+          <li>Аялдама шыныларына және автобус орындықтарының артына QR-стикерлер жапсырылады.</li>
+          <li>Сканерлегенде ойын браузерде бірден ашылады, қосымша орнатудың қажеті жоқ.</li>
+          <li>Жолаушы ойынды аялдамада бастап, автобуста жалғастыра алады.</li>
+          <li>Ең жоғары нәтижелер аялдама экранындағы «Апта даналары» тақтасына шығады (жобаның келесі кезеңі).</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>«Қорқыт аялдамасы» жобасының тұжырымдамасы мен ойын прототипі. Аялдама мен автобус суреттері — визуалды макет.</footer>
+
+<script>
+const K=[
+"Қыз анадан көрмейінше, өнеге алмас. Ұл атадан көрмейінше, сапар шекпес.",
+"Ақымақ балаға ата дәулетінен қайран жоқ.",
+"Өтірік сөз өрге баспайды, өтірікші болғаннан, жарық көріп өмір сүрмеген артық.",
+"Ат қиналмай, жол шалмас.",
+"Жат баланы қанша сақтасаң да, ұл болмайды.",
+"Тозған мақта бөз болмас. Ежелгі жау ел болмас.",
+"Есекке қанша жүген салғанмен, ат болмас.",
+"Күл төбе болмас, күйеу ұл болмас.",
+"Ата даңқын шығарып, өзінің тегін қуған балаға ешкім жетпейді.",
+"Атаның атын былғаған ақымақ баланың әке омыртқасынан жаралып, ана құрсағында шырланып тумағаны жақсы."];
+const M=[
+"Есек тұлпар болмас. Қарға сұңқар болмас.",
+"Әке көрген оқ жонар. Ана көрген тон пішер.",
+"Ежелгі дұшпан ел болмас. Етектен кесіп жең болмас. (Махамбет)",
+"Бала берсең сана бер, сана бермесең ала бер.",
+"Өтірік сөз өрге баспайды.",
+"Топырақ жиылып тау болмас.",
+"Әкенің малы балаға дәулет болмас.",
+"Жан қиналмай жұмыс бітпес. Талап қылмай мұратқа жетпес.",
+"Кісі баласын кісендесең де тұрмайды.",
+"Атадан ұл туса игі. Ата жолын қуса игі."];
+// Korkyt i (0-based) -> proverb index (0-based). Key: 1-2,2-7,3-5,4-8,5-9,6-3,7-1,8-6,9-10,10-4
+const A=[1,6,4,7,8,2,0,5,9,3];
+const STOPS=["Өнеге","Мұра","Шындық","Еңбек","Туыстық","Ел","Табиғат","Шама","Ата жолы","Ар-ұят"];
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const $=id=>document.getElementById(id);
+
+/* fake QR (decorative mockup) */
+document.querySelectorAll('.qr').forEach(el=>{
+  const s=+el.dataset.size,n=21,c=s/n;let r='';
+  const fin=(x,y)=>`<rect x="${x*c}" y="${y*c}" width="${7*c}" height="${7*c}" fill="#000"/><rect x="${(x+1)*c}" y="${(y+1)*c}" width="${5*c}" height="${5*c}" fill="#fff"/><rect x="${(x+2)*c}" y="${(y+2)*c}" width="${3*c}" height="${3*c}" fill="#000"/>`;
+  let seed=7;const rnd=()=>(seed=(seed*9301+49297)%233280)/233280;
+  for(let y=0;y<n;y++)for(let x=0;x<n;x++){
+    if((x<8&&y<8)||(x>12&&y<8)||(x<8&&y>12))continue;
+    if(rnd()>.5)r+=`<rect x="${x*c}" y="${y*c}" width="${c}" height="${c}"/>`;}
+  el.innerHTML=`<svg width="${s}" height="${s}" viewBox="0 0 ${s} ${s}"><rect width="${s}" height="${s}" fill="#fff"/>${r}${fin(0,0)}${fin(14,0)}${fin(0,14)}</svg>`;
+});
+
+/* clock + eta */
+function tick(){const d=new Date();$('clock').textContent=d.toTimeString().slice(0,5)}
+tick();setInterval(tick,30000);
+let eta=3;setInterval(()=>{eta=eta<=1?5:eta-1;$('eta').textContent=eta+' мин'},20000);
+
+/* ===== GAME 1 ===== */
+let g1={order:[],round:0,selL:null,selR:null,score:0,err:0,t0:0,timer:null};
+function g1start(){
+  g1.order=shuf([...Array(10).keys()]);g1.round=0;g1.score=0;g1.err=0;
+  $('g1score').textContent=0;$('g1err').textContent=0;$('g1time').textContent='0:00';
+  $('g1start').classList.add('hide');$('g1end').classList.add('hide');
+  g1.t0=Date.now();clearInterval(g1.timer);
+  g1.timer=setInterval(()=>{const s=Math.floor((Date.now()-g1.t0)/1000);$('g1time').textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0')},500);
+  g1render();
+}
+function g1render(){
+  g1.selL=g1.selR=null;
+  const ids=g1.order.slice(g1.round*5,g1.round*5+5);
+  $('g1round').textContent='Раунд '+(g1.round+1)+' / 2';
+  $('g1left').innerHTML=shuf(ids).map(i=>`<button class="mcard k" data-k="${i}"><span class="tick">✔</span>${K[i]}</button>`).join('');
+  $('g1right').innerHTML=shuf(ids).map(i=>`<button class="mcard m" data-m="${A[i]}"><span class="tick">✔</span>${M[A[i]]}</button>`).join('');
+  document.querySelectorAll('#g1 .mcard').forEach(b=>b.onclick=()=>g1click(b));
+}
+function g1click(b){
+  if(b.classList.contains('ok'))return;
+  const side=b.dataset.k!==undefined?'L':'R';
+  const prev=side==='L'?g1.selL:g1.selR;
+  if(prev)prev.classList.remove('sel');
+  if(prev===b){side==='L'?g1.selL=null:g1.selR=null;return}
+  b.classList.add('sel');side==='L'?g1.selL=b:g1.selR=b;
+  if(g1.selL&&g1.selR){
+    const L=g1.selL,R=g1.selR;
+    if(A[+L.dataset.k]===+R.dataset.m){
+      [L,R].forEach(x=>{x.classList.remove('sel');x.classList.add('ok')});
+      g1.score++;$('g1score').textContent=g1.score;
+      if(g1.score%5===0){
+        if(g1.round===0){g1.round=1;setTimeout(g1render,700)}
+        else{clearInterval(g1.timer);setTimeout(()=>{
+          $('g1res').innerHTML=`Уақытың: <b>${$('g1time').textContent}</b><br>Қателер саны: <b>${g1.err}</b><br>${g1.err===0?'Қорқыт ата риза болар еді! 🏆':'Тағы бір рет ойнап, қатесіз өтіп көр!'}`;
+          $('g1end').classList.remove('hide')},700)}
+      }
+    }else{
+      g1.err++;$('g1err').textContent=g1.err;
+      [L,R].forEach(x=>{x.classList.add('bad');setTimeout(()=>x.classList.remove('bad','sel'),400)});
+    }
+    g1.selL=g1.selR=null;
+  }
+}
+$('g1go').onclick=g1start;$('g1again').onclick=g1start;
+
+/* ===== GAME 2 ===== */
+let g2={i:0,score:0,res:[]};
+function g2route(){
+  const r=$('route');r.querySelectorAll('.dot,.lbl,.bus').forEach(e=>e.remove());
+  STOPS.forEach((s,i)=>{const x=(i/9*100);
+    const d=document.createElement('div');d.className='dot'+(g2.res[i]===true?' star':g2.res[i]===false?' miss':'');d.style.left=x+'%';r.appendChild(d);
+    const l=document.createElement('div');l.className='lbl';l.style.left=x+'%';l.textContent=s;r.appendChild(l);});
+  const b=document.createElement('div');b.className='bus';b.textContent='🚌';b.style.left=(Math.min(g2.i,9)/9*100)+'%';r.appendChild(b);
+  $('rfill').style.width=(Math.min(g2.i,9)/9*100)+'%';
+}
+function g2q(){
+  g2route();
+  const i=g2.i;$('g2stop').textContent=STOPS[i];$('g2fb').textContent='';
+  $('g2q').innerHTML=`<small>${i+1}-аялдама · Қорқыт ата айтқан:</small>«${K[i]}»`;
+  const wrong=shuf([...Array(10).keys()].filter(x=>x!==A[i])).slice(0,2);
+  const opts=shuf([A[i],...wrong]);
+  $('g2opts').innerHTML=opts.map(o=>`<button class="opt" data-o="${o}">${M[o]}</button>`).join('');
+  document.querySelectorAll('#g2opts .opt').forEach(b=>b.onclick=()=>{
+    const ok=+b.dataset.o===A[i];
+    document.querySelectorAll('#g2opts .opt').forEach(x=>{x.disabled=true;if(+x.dataset.o===A[i])x.classList.add('ok')});
+    if(!ok)b.classList.add('no');
+    g2.res[i]=ok;if(ok)g2.score++;$('g2score').textContent=g2.score;
+    $('g2fb').innerHTML=ok?'<span style="color:#5be39f">✔ Дұрыс! Автобус келесі аялдамаға жүрді…</span>':'<span style="color:#ff8a7e">✖ Дұрыс жауап жасылмен белгіленді.</span>';
+    g2.i++;
+    setTimeout(()=>{if(g2.i<10)g2q();else{g2route();
+      $('g2res').innerHTML=`Сіз <b>${g2.score}/10</b> жұлдыз жинадыңыз.<br>${g2.score>=9?'Нағыз дана жолаушы! 🌟':g2.score>=6?'Жақсы нәтиже! Келесі сапарда тағы көріңіз.':'Қорқыт атаның сөздерін тағы бір қарап шығыңыз 🙂'}`;
+      $('g2end').classList.remove('hide')}},ok?1300:2200);
+  });
+}
+function g2start(){g2={i:0,score:0,res:[]};$('g2score').textContent=0;$('g2start').classList.add('hide');$('g2end').classList.add('hide');g2q()}
+$('g2go').onclick=g2start;$('g2again').onclick=g2start;
+g2route();
+
+/* ===== GAME 3 ===== */
+let g3={deck:[],i:0,score:0,streak:0,lock:false};
+function g3start(){
+  g3.deck=shuf([...K.map((t,i)=>({t,k:true,i})),...M.map((t,i)=>({t,k:false,i}))]);
+  g3.i=0;g3.score=0;g3.streak=0;$('g3score').textContent=0;$('g3streak').textContent=0;
+  $('g3end').classList.add('hide');$('g3fb').textContent='Сөзді оқып, кімдікі екенін таңдаңыз.';g3show();
+}
+function g3show(){const c=g3.deck[g3.i];$('g3text').textContent='«'+c.t+'»';$('g3cnt').textContent=(g3.i+1)+'/20';g3.lock=false;$('g3k').disabled=$('g3h').disabled=false}
+function g3ans(isK){
+  if(g3.lock)return;g3.lock=true;$('g3k').disabled=$('g3h').disabled=true;
+  const c=g3.deck[g3.i],ok=c.k===isK;
+  const card=$('g3card');card.classList.add(isK?'fly-l':'fly-r');setTimeout(()=>card.classList.remove('fly-l','fly-r'),250);
+  if(ok){g3.score+=10+g3.streak*2;g3.streak++}else g3.streak=0;
+  $('g3score').textContent=g3.score;$('g3streak').textContent=g3.streak;
+  const pair=c.k?'Халықтағы жұбы: «'+M[A[c.i]]+'»':'Қорқыттағы жұбы: «'+K[A.indexOf(c.i)]+'»';
+  $('g3fb').innerHTML=(ok?'<b class="g">✔ Дұрыс!</b> ':'<b class="r">✖ Қате.</b> ')+'Бұл — '+(c.k?'Қорқыт атаның нақылы':'халық мақалы')+'.<br>'+pair;
+  setTimeout(()=>{g3.i++;if(g3.i<20)g3show();else{
+    $('g3res').innerHTML=`Ұпайыңыз: <b>${g3.score}</b><br>Скриншот жасап, аялдамадағы «Апта даналары» тақтасына қатыс!`;$('g3end').classList.remove('hide')}},1900);
+}
+$('g3k').onclick=()=>g3ans(true);$('g3h').onclick=()=>g3ans(false);$('g3again').onclick=g3start;
+g3start();
+
+</script>
+</body>
+</html>
